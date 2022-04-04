@@ -4,8 +4,8 @@ provider "aws" {
     secret_key = "wzHolvY8hCyfHUHPv2tdL4ykWt9jOLoGiCoJphHT"
     }
 
-    resource "aws_vpc" "vpc1" {
-        cidr_block       = "70.70.0.0/16"
+    resource "aws_vpc" "vpc" {
+        cidr_block       = "80.80.0.0/16"
         instance_tenancy = "default"
       
         tags = {
@@ -13,30 +13,30 @@ provider "aws" {
         }
       }
       resource "aws_subnet" "public" {
-        vpc_id     = aws_vpc.vpc1.id
-        cidr_block = "70.70.1.0/28"
+        vpc_id     = aws_vpc.vpc.id
+        cidr_block = "80.80.1.0/28"
       
         tags = {
           Name = "subnet1"
         }
       }
       resource "aws_subnet" "pri" {
-        vpc_id     = aws_vpc.vpc1.id
-        cidr_block = "70.70.1.16/28"
+        vpc_id     = aws_vpc.vpc.id
+        cidr_block = "80.80.1.16/28"
       
         tags = {
           Name = "subnet2"
         }
       }
       resource "aws_internet_gateway" "massgw" {
-        vpc_id = aws_vpc.vpc1.id
+        vpc_id = aws_vpc.vpc.id
       
         tags = {
           Name = "mass"
         }
       }
       resource "aws_route_table" "Pu_RT" {
-        vpc_id = aws_vpc.vpc1.id
+        vpc_id = aws_vpc.vpc.id
       
         route {
           cidr_block = "0.0.0.0/0"
