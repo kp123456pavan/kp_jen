@@ -1,10 +1,8 @@
 provider "aws" {
     region     = "us-east-1"
-    access_key = "AKIAR7BVU3ANUS555CPL"
-    secret_key = "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"
     }
 
-    resource "aws_vpc" "vpc" {
+    resource "aws_vpc" "vpc1" {
         cidr_block       = "80.80.0.0/16"
         instance_tenancy = "default"
       
@@ -13,7 +11,7 @@ provider "aws" {
         }
       }
       resource "aws_subnet" "public" {
-        vpc_id     = aws_vpc.vpc.id
+        vpc_id     = aws_vpc.vpc1.id
         cidr_block = "80.80.1.0/28"
       
         tags = {
@@ -21,7 +19,7 @@ provider "aws" {
         }
       }
       resource "aws_subnet" "pri" {
-        vpc_id     = aws_vpc.vpc.id
+        vpc_id     = aws_vpc.vpc1.id
         cidr_block = "80.80.1.16/28"
       
         tags = {
@@ -29,14 +27,14 @@ provider "aws" {
         }
       }
       resource "aws_internet_gateway" "massgw" {
-        vpc_id = aws_vpc.vpc.id
+        vpc_id = aws_vpc.vpc1.id
       
         tags = {
           Name = "mass"
         }
       }
       resource "aws_route_table" "Pu_RT" {
-        vpc_id = aws_vpc.vpc.id
+        vpc_id = aws_vpc.vpc1.id
       
         route {
           cidr_block = "0.0.0.0/0"
