@@ -48,6 +48,6 @@ provider "aws" {
         }
       }
       resource "aws_route_table" "Private-RT" {
-        vpc_id = aws_vpc.vpc.id
+        vpc_id = aws_vpc.vpc1.id
         }
       
